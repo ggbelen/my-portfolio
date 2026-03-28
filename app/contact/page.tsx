@@ -24,7 +24,7 @@ export default function ContactPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-base leading-[1.75] text-muted-foreground sm:text-[1.0625rem]">
             For recruiting or collaboration, please use the form below or connect
-            with me on GitHub.
+            with me on GitHub or LinkedIn.
           </p>
         </div>
 
@@ -35,6 +35,8 @@ export default function ContactPage() {
             <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
               Online presence
             </h2>
+
+            {/* GitHub */}
             <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
               <span className="block text-xs font-medium uppercase tracking-wider text-muted-foreground/90">
                 GitHub
@@ -48,6 +50,23 @@ export default function ContactPage() {
                 github.com/ggbelen
               </Link>
             </p>
+
+            {/* LinkedIn (NEW) */}
+            <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+              <span className="block text-xs font-medium uppercase tracking-wider text-muted-foreground/90">
+                LinkedIn
+              </span>
+              <Link
+                href="https://www.linkedin.com/in/gabriel-belen-6247862a3"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${linkClass} mt-1.5 inline-block text-base`}
+              >
+                linkedin.com/in/gabriel-belen-6247862a3
+              </Link>
+            </p>
+
+            {/* Name */}
             <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
               <span className="block text-xs font-medium uppercase tracking-wider text-muted-foreground/90">
                 Name
