@@ -1,4 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
+
+const PROFILE_IMAGE_SRC =
+  "/" + encodeURIComponent("BELEN, GABRIEL G..jpg");
 
 const sectionLinkClass =
   "group mt-6 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground shadow-sm transition-all duration-200 ease-out hover:-translate-y-px hover:scale-[1.02] hover:border-muted-foreground/25 hover:shadow-md active:translate-y-0 active:scale-[0.98] active:shadow-sm";
@@ -13,7 +17,17 @@ export default function Home() {
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
           Portfolio
         </p>
-        <h1 className="mt-5 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl md:leading-[1.08]">
+        <div className="relative mt-8 h-28 w-28 shrink-0 overflow-hidden rounded-full border-2 border-border bg-muted shadow-md ring-4 ring-background sm:h-32 sm:w-32">
+          <Image
+            src={PROFILE_IMAGE_SRC}
+            alt="Gabriel G. Belen"
+            width={256}
+            height={256}
+            className="h-full w-full object-cover"
+            priority
+          />
+        </div>
+        <h1 className="mt-6 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-foreground sm:mt-7 sm:text-5xl md:text-6xl md:leading-[1.08]">
           Gabriel G. Belen
         </h1>
         <p className="mt-6 max-w-xl text-lg font-medium leading-snug text-muted-foreground sm:text-xl">
