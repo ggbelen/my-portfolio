@@ -104,7 +104,7 @@ export default function Home() {
             Let&apos;s talk
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-[1.7] text-muted-foreground sm:text-base">
-            Use the contact form or reach me on GitHub for professional inquiries.
+            Find my links and reach me on GitHub or LinkedIn for professional inquiries.
           </p>
           <Link href="/contact" className={sectionLinkClass}>
             Get in touch
