@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
+import { useTheme } from "next-themes";
+import dynamic from "next/dynamic";
+
+const Beams = dynamic(() => import("@/components/Beams"), { ssr: false });
 
 const PROFILE_IMAGE_SRC =
   "/" + encodeURIComponent("BELEN, GABRIEL G..jpg");
@@ -41,7 +45,6 @@ function AnimatedAvatarFrame() {
         }
       `}</style>
 
-      {/* Outer spinning dashed ring */}
       <g className="ring-cw">
         <circle
           cx="64"
@@ -55,7 +58,6 @@ function AnimatedAvatarFrame() {
         />
       </g>
 
-      {/* Inner counter-spinning ring */}
       <g className="ring-ccw">
         <circle
           cx="64"
@@ -69,7 +71,6 @@ function AnimatedAvatarFrame() {
         />
       </g>
 
-      {/* Static inner guide ring */}
       <circle
         cx="64"
         cy="64"
@@ -82,6 +83,28 @@ function AnimatedAvatarFrame() {
   );
 }
 
+function BeamsBackground() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
+  if (!isDark) return null;
+
+  return (
+    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <Beams
+        beamWidth={2}
+        beamHeight={15}
+        beamNumber={10}
+        lightColor="#ffffff"
+        speed={2}
+        noiseIntensity={1.75}
+        scale={0.2}
+        rotation={0}
+      />
+    </div>
+  );
+}
+
 export function HomeHero() {
   const reduce = useReducedMotion();
 
@@ -89,13 +112,14 @@ export function HomeHero() {
     return (
       <section
         id="home"
-        className="mx-auto flex min-h-[calc(100dvh-3.5rem)] max-w-5xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[calc(100dvh-4rem)] sm:px-6 sm:py-28 md:py-32"
+        className="relative mx-auto flex min-h-[calc(100dvh-3.5rem)] max-w-5xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[calc(100dvh-4rem)] sm:px-6 sm:py-28 md:py-32"
       >
+        <BeamsBackground />
+
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
           Portfolio
         </p>
 
-        {/* Avatar with frame — no animation */}
         <div className="relative mt-8 h-32 w-32 shrink-0 sm:h-36 sm:w-36">
           <AnimatedAvatarFrame />
           <div className="absolute inset-[16px] overflow-hidden rounded-full border border-border/80 bg-muted shadow-[0_8px_30px_rgb(0,0,0,0.06)] ring-1 ring-black/[0.04] dark:shadow-[0_8px_40px_rgb(0,0,0,0.35)] dark:ring-white/[0.06]">
@@ -130,11 +154,13 @@ export function HomeHero() {
   return (
     <motion.section
       id="home"
-      className="mx-auto flex min-h-[calc(100dvh-3.5rem)] max-w-5xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[calc(100dvh-4rem)] sm:px-6 sm:py-28 md:py-32"
+      className="relative mx-auto flex min-h-[calc(100dvh-3.5rem)] max-w-5xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[calc(100dvh-4rem)] sm:px-6 sm:py-28 md:py-32"
       initial="hidden"
       animate="visible"
       variants={container}
     >
+      <BeamsBackground />
+
       <motion.p
         variants={item}
         className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground"
@@ -142,7 +168,6 @@ export function HomeHero() {
         Portfolio
       </motion.p>
 
-      {/* Avatar with animated frame */}
       <motion.div
         variants={item}
         className="relative mt-8 h-32 w-32 shrink-0 sm:h-36 sm:w-36"
