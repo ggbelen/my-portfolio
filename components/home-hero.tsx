@@ -4,6 +4,8 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
+// 1. Import the TextPressure component
+import TextPressure from "@/components/TextPressure";
 
 const Beams = dynamic(() => import("@/components/Beams"), { ssr: false });
 const Threads = dynamic(() => import("@/components/Threads"), { ssr: false });
@@ -119,6 +121,23 @@ function HeroBackground() {
 export function HomeHero() {
   const reduce = useReducedMotion();
 
+  // Component to render the animated name to keep code DRY
+  const NameHeader = () => (
+    <div className="relative mt-6 w-full max-w-4xl h-10 sm:h-14 md:h-20 lg:h-24 mx-auto overflow-visible">
+      <TextPressure
+        text="GABRIEL G. BELEN"
+        flex={true}
+        alpha={false}
+        stroke={false}
+        width={true}
+        weight={true}
+        italic={true}
+        textColor="currentColor"
+        minFontSize={24}
+      />
+    </div>
+  );
+
   if (reduce) {
     return (
       <section
@@ -145,9 +164,9 @@ export function HomeHero() {
           </div>
         </div>
 
-        <h1 className="mt-6 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-foreground sm:mt-7 sm:text-5xl md:text-6xl md:leading-[1.08]">
-          Gabriel G. Belen
-        </h1>
+        {/* Static replacement for h1 when reduced motion is on */}
+        <NameHeader />
+        
         <p className="mt-6 max-w-xl text-lg font-medium leading-snug text-muted-foreground sm:text-xl">
           Graduating Student
         </p>
@@ -196,12 +215,11 @@ export function HomeHero() {
         </div>
       </motion.div>
 
-      <motion.h1
-        variants={item}
-        className="mt-6 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-foreground sm:mt-7 sm:text-5xl md:text-6xl md:leading-[1.08]"
-      >
-        Gabriel G. Belen
-      </motion.h1>
+      {/* Replaced motion.h1 with the NameHeader wrapped in motion.div */}
+      <motion.div variants={item} className="w-full">
+        <NameHeader />
+      </motion.div>
+
       <motion.p
         variants={item}
         className="mt-6 max-w-xl text-lg font-medium leading-snug text-muted-foreground sm:text-xl"
