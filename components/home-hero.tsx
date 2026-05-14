@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 
 const Beams = dynamic(() => import("@/components/Beams"), { ssr: false });
+const Threads = dynamic(() => import("@/components/Threads"), { ssr: false });
 
 const PROFILE_IMAGE_SRC =
   "/" + encodeURIComponent("BELEN, GABRIEL G..jpg");
@@ -83,24 +84,34 @@ function AnimatedAvatarFrame() {
   );
 }
 
-function BeamsBackground() {
+function HeroBackground() {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
-  if (!isDark) return null;
-
   return (
-    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      <Beams
-        beamWidth={2}
-        beamHeight={15}
-        beamNumber={10}
-        lightColor="#ffffff"
-        speed={2}
-        noiseIntensity={1.75}
-        scale={0.2}
-        rotation={0}
-      />
+    <div
+      className="pointer-events-none absolute -z-10 overflow-hidden"
+      style={{ width: "100vw", height: "100%", left: "50%", top: 0, transform: "translateX(-50%)" }}
+    >
+      {isDark ? (
+        <Beams
+          beamWidth={2}
+          beamHeight={15}
+          beamNumber={10}
+          lightColor="#ffffff"
+          speed={2}
+          noiseIntensity={1.75}
+          scale={0.2}
+          rotation={0}
+        />
+      ) : (
+        <Threads
+          color={[0, 0, 0]}
+          amplitude={1}
+          distance={0}
+          enableMouseInteraction
+        />
+      )}
     </div>
   );
 }
@@ -114,7 +125,7 @@ export function HomeHero() {
         id="home"
         className="relative mx-auto flex min-h-[calc(100dvh-3.5rem)] max-w-5xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[calc(100dvh-4rem)] sm:px-6 sm:py-28 md:py-32"
       >
-        <BeamsBackground />
+        <HeroBackground />
 
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
           Portfolio
@@ -159,7 +170,7 @@ export function HomeHero() {
       animate="visible"
       variants={container}
     >
-      <BeamsBackground />
+      <HeroBackground />
 
       <motion.p
         variants={item}
