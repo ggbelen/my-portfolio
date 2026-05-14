@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MotionReveal } from "@/components/motion-reveal";
 
 export const metadata: Metadata = {
   title: "Contact — Gabriel G. Belen",
@@ -14,6 +15,7 @@ export default function ContactPage() {
   return (
     <main className="flex-1">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
+        <MotionReveal>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
             Contact
@@ -25,8 +27,10 @@ export default function ContactPage() {
             For recruiting or collaboration, reach out on GitHub or LinkedIn.
           </p>
         </div>
+        </MotionReveal>
 
-        <aside className="mx-auto mt-14 w-full max-w-md rounded-2xl border border-border bg-muted/25 p-8 text-center shadow-sm dark:bg-muted/15 sm:p-9">
+        <MotionReveal delay={0.08}>
+        <aside className="mx-auto mt-14 w-full max-w-md rounded-3xl border border-border/80 bg-card/80 p-8 text-center shadow-[0_2px_24px_rgb(0,0,0,0.05)] ring-1 ring-black/[0.03] backdrop-blur-sm dark:bg-card/50 dark:shadow-[0_2px_40px_rgb(0,0,0,0.35)] dark:ring-white/[0.05] sm:p-9">
           <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             Online presence
           </h2>
@@ -68,6 +72,7 @@ export default function ContactPage() {
             </span>
           </p>
         </aside>
+        </MotionReveal>
       </div>
     </main>
   );

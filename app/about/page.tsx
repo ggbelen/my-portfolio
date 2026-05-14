@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MotionReveal } from "@/components/motion-reveal";
 
 export const metadata: Metadata = {
   title: "About — Gabriel G. Belen",
@@ -65,28 +66,31 @@ export default function AboutPage() {
   return (
     <main className="flex-1">
       <article className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
-        <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
-          About
-        </p>
-        <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl md:text-[2.5rem] md:leading-tight">
-          About Me
-        </h1>
-
-        <div className="mt-10 max-w-3xl space-y-5 text-base leading-[1.75] text-muted-foreground sm:text-[1.0625rem]">
-          <p>
-            I am a graduating student seeking to contribute front-end and
-            back-end development capability alongside SQL-based data management. My
-            experience includes HTML, PHP, CSS, and Kotlin, with practical use of
-            Visual Studio, Android Studio, and Eclipse IDE to support software
-            development tasks in academic and project settings.
+        <MotionReveal>
+          <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
+            About
           </p>
-          <p>
-            I focus on clear structure, reliable database integration, and
-            documentation that helps teams align on requirements and design.
-          </p>
-        </div>
+          <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl md:text-[2.5rem] md:leading-tight">
+            About Me
+          </h1>
 
-        <section className="mt-14 md:mt-16">
+          <div className="mt-10 max-w-3xl space-y-5 text-base leading-[1.75] text-muted-foreground sm:text-[1.0625rem]">
+            <p>
+              I am a graduating student seeking to contribute front-end and
+              back-end development capability alongside SQL-based data management. My
+              experience includes HTML, PHP, CSS, and Kotlin, with practical use of
+              Visual Studio, Android Studio, and Eclipse IDE to support software
+              development tasks in academic and project settings.
+            </p>
+            <p>
+              I focus on clear structure, reliable database integration, and
+              documentation that helps teams align on requirements and design.
+            </p>
+          </div>
+        </MotionReveal>
+
+        <MotionReveal delay={0.06}>
+          <section className="mt-14 md:mt-16">
           <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             Education
           </h2>
@@ -109,7 +113,9 @@ export default function AboutPage() {
             </li>
           </ul>
         </section>
+        </MotionReveal>
 
+        <MotionReveal delay={0.1}>
         <section className="mt-14 md:mt-16">
           <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             Skills / Expertise
@@ -124,7 +130,9 @@ export default function AboutPage() {
             ))}
           </ul>
         </section>
+        </MotionReveal>
 
+        <MotionReveal delay={0.14}>
         <section className="mt-14 md:mt-16">
           <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             Certifications
@@ -147,7 +155,9 @@ export default function AboutPage() {
             ))}
           </ul>
         </section>
+        </MotionReveal>
 
+        <MotionReveal delay={0.18}>
         <section className="mt-14 md:mt-16">
           <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             System Development Experience
@@ -175,6 +185,7 @@ export default function AboutPage() {
             </ul>
           </div>
         </section>
+        </MotionReveal>
       </article>
     </main>
   );
