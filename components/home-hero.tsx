@@ -22,6 +22,66 @@ const item = {
   },
 };
 
+function AnimatedAvatarFrame() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 128 128"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="pointer-events-none absolute inset-0 h-full w-full"
+    >
+      <style>{`
+        @keyframes spin-cw  { to { transform: rotate(360deg);  } }
+        @keyframes spin-ccw { to { transform: rotate(-360deg); } }
+        .ring-cw  { transform-origin: 64px 64px; animation: spin-cw  4s linear infinite; }
+        .ring-ccw { transform-origin: 64px 64px; animation: spin-ccw 6s linear infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .ring-cw, .ring-ccw { animation: none; }
+        }
+      `}</style>
+
+      {/* Outer spinning dashed ring */}
+      <g className="ring-cw">
+        <circle
+          cx="64"
+          cy="64"
+          r="58"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeDasharray="8 6"
+          strokeLinecap="round"
+          opacity="0.7"
+        />
+      </g>
+
+      {/* Inner counter-spinning ring */}
+      <g className="ring-ccw">
+        <circle
+          cx="64"
+          cy="64"
+          r="50"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeDasharray="3 10"
+          strokeLinecap="round"
+          opacity="0.35"
+        />
+      </g>
+
+      {/* Static inner guide ring */}
+      <circle
+        cx="64"
+        cy="64"
+        r="44"
+        stroke="currentColor"
+        strokeWidth="0.5"
+        opacity="0.2"
+      />
+    </svg>
+  );
+}
+
 export function HomeHero() {
   const reduce = useReducedMotion();
 
@@ -34,16 +94,22 @@ export function HomeHero() {
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
           Portfolio
         </p>
-        <div className="relative mt-8 h-28 w-28 shrink-0 overflow-hidden rounded-full border border-border/80 bg-muted shadow-[0_8px_30px_rgb(0,0,0,0.06)] ring-1 ring-black/[0.04] dark:shadow-[0_8px_40px_rgb(0,0,0,0.35)] dark:ring-white/[0.06] sm:h-32 sm:w-32">
-          <Image
-            src={PROFILE_IMAGE_SRC}
-            alt="Gabriel G. Belen"
-            width={256}
-            height={256}
-            className="h-full w-full object-cover"
-            priority
-          />
+
+        {/* Avatar with frame — no animation */}
+        <div className="relative mt-8 h-32 w-32 shrink-0 sm:h-36 sm:w-36">
+          <AnimatedAvatarFrame />
+          <div className="absolute inset-[16px] overflow-hidden rounded-full border border-border/80 bg-muted shadow-[0_8px_30px_rgb(0,0,0,0.06)] ring-1 ring-black/[0.04] dark:shadow-[0_8px_40px_rgb(0,0,0,0.35)] dark:ring-white/[0.06]">
+            <Image
+              src={PROFILE_IMAGE_SRC}
+              alt="Gabriel G. Belen"
+              width={256}
+              height={256}
+              className="h-full w-full object-cover"
+              priority
+            />
+          </div>
         </div>
+
         <h1 className="mt-6 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-foreground sm:mt-7 sm:text-5xl md:text-6xl md:leading-[1.08]">
           Gabriel G. Belen
         </h1>
@@ -75,19 +141,25 @@ export function HomeHero() {
       >
         Portfolio
       </motion.p>
+
+      {/* Avatar with animated frame */}
       <motion.div
         variants={item}
-        className="relative mt-8 h-28 w-28 shrink-0 overflow-hidden rounded-full border border-border/80 bg-muted shadow-[0_8px_30px_rgb(0,0,0,0.06)] ring-1 ring-black/[0.04] dark:shadow-[0_8px_40px_rgb(0,0,0,0.35)] dark:ring-white/[0.06] sm:h-32 sm:w-32"
+        className="relative mt-8 h-32 w-32 shrink-0 sm:h-36 sm:w-36"
       >
-        <Image
-          src={PROFILE_IMAGE_SRC}
-          alt="Gabriel G. Belen"
-          width={256}
-          height={256}
-          className="h-full w-full object-cover"
-          priority
-        />
+        <AnimatedAvatarFrame />
+        <div className="absolute inset-[16px] overflow-hidden rounded-full border border-border/80 bg-muted shadow-[0_8px_30px_rgb(0,0,0,0.06)] ring-1 ring-black/[0.04] dark:shadow-[0_8px_40px_rgb(0,0,0,0.35)] dark:ring-white/[0.06]">
+          <Image
+            src={PROFILE_IMAGE_SRC}
+            alt="Gabriel G. Belen"
+            width={256}
+            height={256}
+            className="h-full w-full object-cover"
+            priority
+          />
+        </div>
       </motion.div>
+
       <motion.h1
         variants={item}
         className="mt-6 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-foreground sm:mt-7 sm:text-5xl md:text-6xl md:leading-[1.08]"
